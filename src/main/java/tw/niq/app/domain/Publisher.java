@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,30 +20,26 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Book {
+public class Publisher {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String title;
+	private String name;
 	
-	private String isbn;
+	private String address;
+	
+	private String city;
+	
+	private String state;
+	
+	private String zip;
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@ManyToMany
-	@JoinTable(name = "author_book", 
-		joinColumns = @JoinColumn(name = "book_id"), 
-		inverseJoinColumns = @JoinColumn(name = "author_id"))
-	private Set<Author> authors = new HashSet<>();
-
-	@ManyToOne
-	private Publisher publisher;
-	
-	public Book(String title, String isbn) {
-		this.title = title;
-		this.isbn = isbn;
-	}
+	@OneToMany
+	@JoinColumn(name = "publisher_id")
+	private Set<Book> books = new HashSet<>();
 	
 }
