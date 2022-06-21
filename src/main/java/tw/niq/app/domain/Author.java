@@ -33,5 +33,10 @@ public class Author {
 	@EqualsAndHashCode.Exclude
 	@ManyToMany(mappedBy = "authors")
 	private Set<Book> books = new HashSet<>();
+
+	public Author(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 }
